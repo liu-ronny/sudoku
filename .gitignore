@@ -1,6 +1,6 @@
 __pycache__
 
-.idea/
-Include/
-Lib/
-Scripts/
+/.idea/
+/Include/
+/Lib/
+/Scripts/
