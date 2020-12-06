@@ -253,15 +253,22 @@ $(document).ready(() => {
             const hasEmptyCells = cells.toArray().some((cell) => $(cell).text().trim() === '');
 
             if (hasEmptyCells) {
-                cells.each(function() {
-                    const cell = $(this);
+//                cells.each(function() {
+//                    const cell = $(this);
+//
+//                    if (cell.text().trim() === '') {
+//                        cell.css('background-color', 'var(--light-red)');
+//                    }
+//                });
+//
+//                setTimeout(() => cells.css('background-color', ''), 300);
+                solved = true;
+                showFailure();
 
-                    if (cell.text().trim() === '') {
-                        cell.css('background-color', 'var(--light-red)');
-                    }
-                });
-
-                setTimeout(() => cells.css('background-color', ''), 300);
+                setTimeout(() => {
+                    resetStatus();
+                    hideFailure();
+                }, 650);
             } else {
                 checkSolution();
             }
@@ -398,7 +405,7 @@ $(document).ready(() => {
                 setTimeout(() => {
                     resetStatus();
                     hideFailure();
-                }, 500);
+                }, 650);
             }
         })
 
