@@ -1,5 +1,6 @@
 :root {
     --grey: #F2F2F2;
+    --dark-grey: #CBCBCB;
     --beige: #F2D4AE;
     --medium-beige: #F2D4AE;
     --light-beige: #FDF8F0;
@@ -25,6 +26,10 @@
 
 .grey {
     color: var(--grey);
+}
+
+.dark-grey {
+    color: var(--dark-grey);
 }
 
 .green {
@@ -151,4 +156,12 @@
     font-weight: bold;
     font-size: 1.5rem;
     opacity: 1;
+}
+
+#info-btn:hover {
+    color: var(--secondary);
+}
+
+#info {
+    display: none;
 }

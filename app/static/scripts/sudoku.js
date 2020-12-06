@@ -182,19 +182,44 @@ $(document).ready(() => {
         });
     }
 
-    const handleKeyup = () => {
-        $(window).on('keyup', function(event) {
+    const handleKeydown = () => {
+        $(window).on('keydown', function(event) {
             if (focusedCell) {
-                if (event.key === 'Backspace' || event.key === 'Delete') {
+                const num = Number(event.key);
+                const isDelete = event.key === 'Backspace' || event.key === 'Delete';
+                const isValInput = !isNaN(num) && num >= 1 && num <= 9;
+                const isNavUp = event.key === 'ArrowUp' || event.key === 'w';
+                const isNavDown = event.key === 'ArrowDown' || event.key === 's';
+                const isNavLeft = event.key === 'ArrowLeft' || event.key === 'l';
+                const isNavRight = event.key === 'ArrowRight' || event.key === 'r';
+
+                let nextCell;
+
+                if (isDelete) {
+                    event.preventDefault();
                     focusedCell.text('');
                     focusedCell.css('color', 'var(--black)');
-                } else {
-                    const key = Number(event.key);
+                } else if (isValInput) {
+                    event.preventDefault();
+                    focusedCell.text(num);
+                    focusedCell.css('color', 'var(--green)');
+                } else if (isNavUp) {
+                    event.preventDefault();
+                    nextCell = findNextSolutionCell('up');
+                } else if (isNavDown) {
+                    event.preventDefault();
+                    nextCell = findNextSolutionCell('down');
+                } else if (isNavLeft) {
+                    event.preventDefault();
+                    nextCell = findNextSolutionCell('left');
+                } else if (isNavRight) {
+                    event.preventDefault();
+                    nextCell = findNextSolutionCell('right');
+                }
 
-                    if (!isNaN(key) && key >= 1 && key <= 9) {
-                        focusedCell.text(key);
-                        focusedCell.css('color', 'var(--green)');
-                    }
+                if (nextCell) {
+                    focusedCell = nextCell;
+                    highlightUnits(nextCell);
                 }
             }
         })
@@ -224,6 +249,7 @@ $(document).ready(() => {
 
     const handleCheckSolution = () => {
         $('#check-solution-btn').on('click', () => {
+            cells.css('background-color', '');
             const hasEmptyCells = cells.toArray().some((cell) => $(cell).text().trim() === '');
 
             if (hasEmptyCells) {
@@ -259,6 +285,58 @@ $(document).ready(() => {
                 }
             }
         }
+    }
+
+    const findNextSolutionCell = (direction) => {
+        let [row, col] = focusedCell.attr('id').split('-').map((pos) => Number(pos));
+
+        if (direction === 'up') {
+            row--;
+
+            while (row >= 0) {
+                if (puzzle[row][col] === EMPTY) {
+                    break;
+                }
+
+                row--;
+            }
+        } else if (direction === 'down') {
+            row++;
+
+            while (row < ROWS) {
+                if (puzzle[row][col] === EMPTY) {
+                    break;
+                }
+
+                row++;
+            }
+        } else if (direction === 'left') {
+            col--;
+
+            while (col >= 0) {
+                if (puzzle[row][col] === EMPTY) {
+                    break;
+                }
+
+                col--;
+            }
+        } else if (direction === 'right') {
+            col++;
+
+            while (col < COLS) {
+                if (puzzle[row][col] === EMPTY) {
+                    break;
+                }
+
+                col++;
+            }
+        }
+
+        if (row < 0 || row >= ROWS || col < 0 || col >= COLS) {
+            return null;
+        }
+
+        return $(`#${row}-${col}`);
     }
 
     const getPuzzle = (difficulty) => {
@@ -331,7 +409,7 @@ $(document).ready(() => {
     dynamicallyResizeCells();
     dynamicallyUpdateDifficulty();
     handleClick();
-    handleKeyup();
+    handleKeydown();
     handleNewGame();
     handleReset();
     handleSolve();
