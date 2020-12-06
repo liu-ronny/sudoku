@@ -1,0 +1,154 @@
+:root {
+    --grey: #F2F2F2;
+    --beige: #F2D4AE;
+    --medium-beige: #F2D4AE;
+    --light-beige: #FDF8F0;
+    --orange: #D97C2B;
+    --light-orange: #F0CCAD;
+    --dark-orange: #BF5315;
+    --pink: #BF8A8A;
+    --light-pink: #E2C9C9;
+    --green: #2A8C67;
+    --light-green: #3EC592;
+    --red: #8C362A;
+    --light-red: #EECCC7;
+    --black: #212529;
+}
+
+.orange {
+    color: var(--orange);
+}
+
+.pink {
+    color: var(--pink);
+}
+
+.grey {
+    color: var(--grey);
+}
+
+.green {
+    color: var(--green);
+}
+
+.green-border {
+    border: 2px solid var(--green);
+}
+
+.red {
+    color: var(--red);
+}
+
+.red-border {
+    border: 2px solid var(--red);
+}
+
+.cell {
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+
+.cell:hover {
+    background-color: var(--medium-beige);
+}
+
+.border-top-thick {
+    border-size: 2px;
+}
+
+.dropdown-item {
+    cursor: pointer;
+}
+
+.dropdown-item:active {
+    background-color: var(--pink);
+}
+
+.btn-custom-pink {
+    color: var(--pink);
+    border: 1px solid var(--pink);
+}
+
+.btn-custom-pink:hover {
+    color: white;
+    background-color: var(--pink);
+}
+
+.btn-custom-pink:focus {
+    box-shadow: 0 0 0 0.2rem var(--light-pink);
+}
+
+.btn-custom-orange {
+    color: var(--orange);
+    border: 1px solid var(--orange);
+}
+
+.btn-custom-orange:hover {
+    color: white;
+    background-color: var(--orange);
+}
+
+.btn-custom-orange:focus {
+    box-shadow: 0 0 0 0.2rem var(--light-orange);
+}
+
+.btn-custom-green {
+    color: var(--green);
+    border: 1px solid var(--green);
+}
+
+.btn-custom-green:hover {
+    color: white;
+    background-color: var(--green);
+}
+
+.btn-custom-green:focus {
+    box-shadow: 0 0 0 0.2rem var(--light-green);
+}
+
+#board {
+    visibility: hidden;
+}
+
+#board-container {
+    position: relative;
+}
+
+#spinner {
+    position: absolute;
+    display: flex;
+    top: 0;
+    left: 0;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 10;
+    visibility: hidden;
+    color: var(--pink);
+    border: 2px solid var(--pink);
+}
+
+.overlay {
+    position: absolute;
+    display: flex;
+    top: 0;
+    left: 0;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 10;
+    visibility: hidden;
+    background-color: var(--light);
+    opacity: 0.95;
+}
+
+.overlay-msg {
+    font-weight: bold;
+    font-size: 1.5rem;
+    opacity: 1;
+}

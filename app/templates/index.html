@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/sudoku.css') }}">
+    <script src="https://kit.fontawesome.com/9dfb32769b.js" crossorigin="anonymous"></script>
+    <title>Sudoku</title>
+</head>
+<body>
+    <div class="container">
+        <h2 class="font-weight-bold mt-5 orange"><i class="fas fa-puzzle-piece mr-3"></i>Sudoku</h2>
+        <hr />
+        <div class="d-flex justify-content-center mt-5">
+            <div>
+                <div>
+                    <i class="fas fa-level-up-alt mr-2 pink"></i>Difficulty:
+                    <button type="button" class="btn btn-sm btn-custom-pink dropdown-toggle ml-2" id="difficulty" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Easy
+                    </button>
+                    <div class="dropdown-menu">
+                        <div class="dropdown-item difficulty-option">Easy</div>
+                        <div class="dropdown-item difficulty-option">Medium</div>
+                        <div class="dropdown-item difficulty-option">Hard</div>
+                    </div>
+                    <button id="new-game-btn" class="btn btn-sm btn-custom-pink float-right"><i class="fas fa-plus mr-2 fa-fw"></i>New game</button>
+                </div>
+                <div id="board-container">
+                    <div id="spinner" class="flex-column">
+                        <span id="spinner-msg" class="font-weight-bold"></span>
+                        <div class="spinner-border mt-3" role="status">
+                            <span class="sr-only">Loading...</span>
+                        </div>
+                    </div>
+                    <div id="success" class="overlay green-border">
+                        <div class="overlay-msg green"><i class="far fa-check-circle mr-2"></i>You solved the puzzle!</div>
+                    </div>
+                    <div id="failure" class="overlay red-border">
+                        <div class="overlay-msg red"><i class="far fa-times-circle mr-2"></i>Incorrect solution</div>
+                    </div>
+                    <table class="table mt-4" id="board">
+                        <tbody>
+                            {% for row in range(9) %}
+                                <tr>
+                                {% for col in range(9) %}
+                                    <td class="border border-dark cell text-center align-middle r-{{ row }} c-{{ col }}" id="{{ row }}-{{ col }}">0</td>
+                                {% endfor %}
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                <div class="row justify-content-between mt-4">
+                    <div class="col-auto text-left">
+                        <button id="check-solution-btn" class="btn btn-custom-orange"><i class="fas fa-check mr-2 fa-fw"></i>Check solution</button>
+                    </div>
+                    <div class="col-auto text-center">
+                        <button id="reset-btn" class="btn btn-custom-orange"><i class="fas fa-undo mr-2 fa-fw"></i>Reset</button>
+                    </div>
+                    <div class="col-auto text-right">
+                        <button id="solve-btn" class="btn btn-custom-green"><i class="fas fa-wrench mr-2 fa-fw"></i>Solve</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="{{ url_for('static', filename='scripts/sudoku.js') }}"></script>
+</body>
+</html>
